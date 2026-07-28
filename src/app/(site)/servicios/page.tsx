@@ -1,0 +1,100 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { BrandBackdrop, BrandDivider } from "@/components/BrandMotifs";
+import { PageHero } from "@/components/PageHero";
+import { services, siteConfig } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "Servicios",
+  description:
+    "Reformas integrales, cocinas y baños, locales, oficinas y soluciones inteligentes en Madrid.",
+};
+
+const images = [
+  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1556912173-46c336c7fd55?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+  "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80",
+];
+
+export default function ServiciosPage() {
+  return (
+    <>
+      <PageHero
+        eyebrow="Servicios"
+        title="Construcción y reforma con visión integral"
+        description="Acompañamos su proyecto desde la idea inicial hasta la entrega, con un enfoque práctico, estético y eficiente."
+      />
+
+      <section className="relative overflow-hidden bg-white">
+        <BrandBackdrop variant="light" showBlobs={false} showHexFloat />
+        {services.map((service, index) => (
+          <article
+            key={service.slug}
+            className={`relative grid lg:grid-cols-2 ${index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}
+          >
+            <div className="relative min-h-[280px] lg:min-h-[420px]">
+              <Image
+                src={images[index % images.length]}
+                alt={service.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-cyan/20"
+              />
+            </div>
+            <div className="relative flex flex-col justify-center px-6 py-12 md:px-12 lg:py-16">
+              <span className="flex h-10 w-10 items-center justify-center bg-green text-[11px] font-bold tracking-[0.12em] text-white hex-clip">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h2 className="gold-underline mt-4 font-display text-2xl font-bold text-navy md:text-3xl">
+                {service.title}
+              </h2>
+              <p className="mt-8 max-w-xl text-base leading-relaxed text-muted">
+                {service.description}
+              </p>
+            </div>
+            {index < services.length - 1 && (
+              <div className="col-span-full h-px bg-[linear-gradient(90deg,transparent,var(--cyan),var(--green),transparent)] lg:col-span-2" />
+            )}
+          </article>
+        ))}
+      </section>
+
+      <section className="relative overflow-hidden bg-greige">
+        <BrandBackdrop variant="light" />
+        <div className="relative section-pad">
+          <div className="mx-auto max-w-3xl text-center">
+            <div
+              aria-hidden
+              className="mx-auto mb-5 h-1 w-16 bg-[linear-gradient(90deg,var(--cyan),var(--green))]"
+            />
+            <h2 className="font-display text-2xl font-bold tracking-wide text-navy uppercase md:text-3xl">
+              ¿No está seguro de por dónde empezar?
+            </h2>
+            <p className="mt-4 text-muted">
+              Cuéntenos su caso y le orientamos sin compromiso. También puede
+              escribirnos por WhatsApp.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link href="/contacto" className="btn-primary">
+                Pedir presupuesto
+              </Link>
+              <a
+                href={`https://wa.me/${siteConfig.whatsapp}`}
+                className="btn-ghost-dark"
+              >
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+        <BrandDivider withSkyline />
+      </section>
+    </>
+  );
+}
