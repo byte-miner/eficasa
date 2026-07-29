@@ -9,7 +9,7 @@ export function JsonLd() {
     url: siteConfig.url,
     telephone: siteConfig.phone,
     email: siteConfig.email,
-    image: `${siteConfig.url}/brand/EFICASA-Logo-Horizontal-Positivo.jpg`,
+    image: `${siteConfig.url}/brand/EFICASA-Logo-Horizontal-Positivo.png`,
     address: {
       "@type": "PostalAddress",
       streetAddress: siteConfig.address.street,

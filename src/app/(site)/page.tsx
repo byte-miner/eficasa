@@ -5,7 +5,6 @@ import { CompanyVideo } from "@/components/CompanyVideo";
 import { ContactSection } from "@/components/ContactSection";
 import { Hero } from "@/components/Hero";
 import { IntroReveal } from "@/components/IntroReveal";
-import { MadridSkyline } from "@/components/MadridSkyline";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getFeaturedProjects } from "@/lib/sanity/queries";
@@ -26,7 +25,6 @@ export default async function HomePage() {
       <Hero />
 
       <IntroReveal />
-      <BrandDivider withSkyline className="bg-white" />
 
       {/* Service image cards */}
       <section className="relative overflow-hidden bg-navy pb-4">
@@ -157,7 +155,6 @@ export default async function HomePage() {
           </div>
           <CompanyVideo src="/videos/presentacion-eficasa.mp4" />
         </div>
-        <BrandDivider withSkyline />
       </section>
 
       {/* Projects gallery */}

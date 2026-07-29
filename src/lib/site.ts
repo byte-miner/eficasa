@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: "EFICASA",
+  name: "eficasa",
   tagline: "Reformas y Soluciones Inteligentes",
   description:
     "Empresa de reformas y construcción en Madrid. Reformas inteligentes y ecológicas para viviendas, locales y oficinas.",

@@ -10,7 +10,7 @@ export default function SiteLayout({
   return (
     <div className="flex min-h-full flex-col">
       <Header />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 pt-[var(--site-header-height)]">{children}</main>
       <Footer />
       <WhatsAppButton />
     </div>

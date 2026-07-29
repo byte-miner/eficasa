@@ -52,7 +52,17 @@ export function ContactSection({
           </div>
         </div>
       </div>
-      <MadridSkyline className="relative h-12 w-full text-navy/12 md:h-16" />
+      {/* Full-bleed Madrid silhouette — mobile/tablet vs desktop assets */}
+      <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2">
+        <MadridSkyline
+          variant="contactMobile"
+          className="!h-auto !w-full max-w-none object-contain object-bottom lg:hidden"
+        />
+        <MadridSkyline
+          variant="contact"
+          className="!h-auto !w-full max-w-none object-contain object-bottom hidden lg:block"
+        />
+      </div>
       <BrandDivider />
     </section>
   );

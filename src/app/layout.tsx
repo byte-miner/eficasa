@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} | ${siteConfig.tagline}`,
     description: siteConfig.description,
-    images: [{ url: "/brand/EFICASA-Logo-Horizontal-Positivo.jpg", width: 1200, height: 630 }],
+    images: [{ url: "/brand/EFICASA-Logo-Horizontal-Positivo.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -53,8 +53,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/brand/EFICASA-Logo-Horizontal-Positivo.jpg",
-    apple: "/brand/EFICASA-Logo-Horizontal-Positivo.jpg",
+    icon: "/brand/EFICASA-Logo-Horizontal-Positivo.png",
+    apple: "/brand/EFICASA-Logo-Horizontal-Positivo.png",
   },
 };
 

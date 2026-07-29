@@ -5,30 +5,34 @@ type BrandBackdropProps = {
   className?: string;
   showBlobs?: boolean;
   showDots?: boolean;
+  /** Dense hex grid wallpaper — off by default (use sparingly). */
+  showHexPattern?: boolean;
+  /** Decorative floating hex outlines — off by default. */
   showHexFloat?: boolean;
 };
 
-/** Shared EFICASA art layer: hex pattern, fluid blobs, floating hexagons. */
+/** Soft brand atmosphere (blobs / dots). Hex wallpaper stays opt-in. */
 export function BrandBackdrop({
   variant = "light",
   className = "",
   showBlobs = true,
   showDots = true,
-  showHexFloat = true,
+  showHexPattern = false,
+  showHexFloat = false,
 }: BrandBackdropProps) {
   const pattern =
-    variant === "light" ? "hex-pattern-light opacity-45" : "hex-pattern opacity-35";
+    variant === "light" ? "hex-pattern-light opacity-30" : "hex-pattern opacity-25";
 
   return (
     <div
       aria-hidden
       className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
     >
-      <div className={`absolute inset-0 ${pattern}`} />
+      {showHexPattern && <div className={`absolute inset-0 ${pattern}`} />}
       {showDots && (
         <div
           className={`dot-grid absolute inset-0 ${
-            variant === "light" ? "opacity-20" : "opacity-25"
+            variant === "light" ? "opacity-15" : "opacity-20"
           }`}
         />
       )}
@@ -52,7 +56,6 @@ export function BrandBackdrop({
         <>
           <div className="float-hex absolute top-[12%] right-[6%] hidden h-20 w-20 border border-cyan/35 hex-clip md:block" />
           <div className="float-hex-slow absolute top-[40%] right-[18%] hidden h-12 w-12 bg-lime/20 hex-clip md:block" />
-          <div className="float-hex absolute bottom-[14%] left-[5%] hidden h-24 w-24 border border-green/30 hex-clip lg:block" />
         </>
       )}
     </div>
@@ -71,11 +74,22 @@ export function BrandDivider({
 }: BrandDividerProps) {
   return (
     <div className={`pointer-events-none relative ${className}`}>
-      {withSkyline && (
-        <MadridSkyline className="h-12 w-full text-navy/15 md:h-16" />
+      {withSkyline ? (
+        /* Landmarks silhouette — avoids the hex-pattern baked into the block strip */
+        <>
+          <MadridSkyline
+            variant="landmarks"
+            className="mx-auto h-20 w-full max-w-5xl opacity-80 md:h-28"
+          />
+          <div className="h-1 w-full bg-[linear-gradient(90deg,var(--navy)_0%,var(--cyan)_50%,var(--green)_100%)]" />
+          <div className="h-px w-full bg-cyan/60" />
+        </>
+      ) : (
+        <>
+          <div className="h-1 w-full bg-[linear-gradient(90deg,var(--navy)_0%,var(--cyan)_50%,var(--green)_100%)]" />
+          <div className="h-px w-full bg-cyan/60" />
+        </>
       )}
-      <div className="h-1 w-full bg-[linear-gradient(90deg,var(--navy)_0%,var(--cyan)_50%,var(--green)_100%)]" />
-      <div className="h-px w-full bg-cyan/60" />
     </div>
   );
 }

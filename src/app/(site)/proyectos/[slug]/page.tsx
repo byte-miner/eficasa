@@ -30,7 +30,6 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <article className="relative overflow-hidden bg-navy pt-12 pb-20 text-white">
-      <div aria-hidden className="hex-pattern pointer-events-none absolute inset-0 opacity-25" />
       <div className="relative mx-auto max-w-5xl px-4 md:px-6">
         <Link
           href="/proyectos"

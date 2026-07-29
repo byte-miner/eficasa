@@ -9,9 +9,9 @@ type HexagonFrameProps = {
 };
 
 const sizes = {
-  sm: "h-36 w-36 md:h-40 md:w-40",
+  sm: "h-40 w-40 md:h-44 md:w-44",
   md: "h-48 w-48 md:h-56 md:w-56",
-  lg: "h-56 w-56 md:h-72 md:w-72",
+  lg: "h-56 w-56 md:h-64 md:w-64",
 };
 
 export function HexagonFrame({
@@ -24,7 +24,10 @@ export function HexagonFrame({
   return (
     <div
       className={`relative ${sizes[size]} ${className}`}
-      style={{ filter: "drop-shadow(0 16px 28px rgba(0,0,0,0.28))" }}
+      style={{
+        filter:
+          "drop-shadow(0 12px 24px rgba(0,0,0,0.3)) drop-shadow(0 0 14px rgba(91,200,224,0.35))",
+      }}
     >
       <div
         className="hex-clip absolute inset-0 p-[2.5px]"

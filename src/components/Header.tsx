@@ -9,22 +9,34 @@ import { navLinks, siteConfig } from "@/lib/site";
 export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
   return (
-    <header className="relative z-50 border-b border-line bg-white">
+    <header
+      className={`fixed inset-x-0 top-0 z-50 border-b bg-white/95 backdrop-blur-md transition-shadow ${
+        scrolled ? "border-line shadow-[0_8px_24px_rgba(45,52,136,0.08)]" : "border-line/80"
+      }`}
+    >
       <div className="h-1 w-full bg-[linear-gradient(90deg,var(--navy)_0%,var(--cyan)_50%,var(--green)_100%)]" />
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 px-4 md:px-6">
-        <Link href="/" className="shrink-0">
+      <div className="mx-auto flex h-[5.25rem] max-w-7xl items-center justify-between gap-3 px-4 md:h-[6rem] md:px-6">
+        <Link href="/" className="relative z-10 shrink-0" aria-label={siteConfig.name}>
           <Image
-            src="/brand/EFICASA-Logo-Horizontal-Positivo.jpg"
+            src="/brand/EFICASA-Logo-Horizontal-Positivo.png"
             alt={siteConfig.name}
-            width={220}
-            height={52}
-            className="h-11 w-auto max-h-11 object-contain md:h-12 md:max-h-12"
+            width={520}
+            height={124}
+            className="h-[4.5rem] w-auto max-h-[4.5rem] object-contain object-left sm:h-[5rem] sm:max-h-[5rem] md:h-[5.25rem] md:max-h-[5.25rem]"
             priority
           />
         </Link>
@@ -36,10 +48,8 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-2.5 py-2 text-[11px] font-bold tracking-[0.12em] uppercase transition-colors xl:px-3 ${
-                  active
-                    ? "text-navy"
-                    : "text-navy/55 hover:text-navy"
+                className={`px-2.5 py-2 text-sm font-bold tracking-[0.1em] uppercase transition-colors xl:px-3.5 ${
+                  active ? "text-navy" : "text-navy/55 hover:text-navy"
                 }`}
               >
                 {link.label}
@@ -49,7 +59,7 @@ export function Header() {
         </nav>
 
         <div className="hidden shrink-0 items-center lg:flex">
-          <Link href="/contacto" className="btn-primary !py-2 !text-[11px]">
+          <Link href="/contacto" className="btn-primary !py-2.5 !text-sm !tracking-[0.1em]">
             Presupuesto gratis
           </Link>
         </div>
@@ -81,7 +91,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="border-b border-line py-3 text-xs font-bold tracking-[0.14em] text-navy uppercase"
+                className="border-b border-line py-3.5 text-base font-bold tracking-[0.12em] text-navy uppercase"
               >
                 {link.label}
               </Link>

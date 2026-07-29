@@ -1,22 +1,77 @@
 type MadridSkylineProps = {
   className?: string;
-  fill?: string;
+  /**
+   * Client silhouettes:
+   * - landmarks = grayscale Madrid skyline (Cuatro Torres style)
+   * - contact = detailed Madrid landmarks SVG (desktop contact)
+   * - contactMobile = grayscale skyline for mobile/tablet contact
+   * - block = stylized block skyline strip
+   */
+  variant?: "landmarks" | "contact" | "contactMobile" | "block";
+  /** Invert for visibility on dark backgrounds (keeps grey depth) */
+  onDark?: boolean;
 };
 
-/** Stylized Madrid skyline (KIO, Cuatro Torres, etc.) for brand differentiation. */
+const srcByVariant = {
+  landmarks: "/brand/madrid-silhouette-landmarks.png",
+  contact: "/brand/madrid-silhouette-contact.svg?v=4",
+  contactMobile: "/images/madrid-silhouette-mobile.png",
+  block: "/brand/madrid-silhouette-4.png",
+} as const;
+
+/** Soft navy+cyan mix — slight blue brand tint (not flat black). */
+const BRAND_SKYLINE_TINT =
+  "color-mix(in srgb, var(--navy) 78%, var(--cyan) 22%)";
+
+const aspectByVariant: Partial<Record<keyof typeof srcByVariant, string>> = {
+  contact: "1024 / 188",
+  contactMobile: "1024 / 478",
+};
+
+/** Client-provided Madrid / city silhouettes — exact image assets. */
 export function MadridSkyline({
   className = "",
-  fill = "currentColor",
+  variant = "landmarks",
+  onDark = false,
 }: MadridSkylineProps) {
+  const src = srcByVariant[variant];
+  const brandTint =
+    !onDark && (variant === "contact" || variant === "contactMobile");
+
+  // Mask + brand fill keeps a consistent blue tint on SVG and PNG (all breakpoints).
+  if (brandTint) {
+    return (
+      <div
+        aria-hidden
+        className={`pointer-events-none w-full ${className}`}
+        style={{
+          aspectRatio: aspectByVariant[variant],
+          backgroundColor: BRAND_SKYLINE_TINT,
+          opacity: 0.88,
+          WebkitMaskImage: `url("${src}")`,
+          maskImage: `url("${src}")`,
+          WebkitMaskSize: "contain",
+          maskSize: "contain",
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat",
+          WebkitMaskPosition: "bottom center",
+          maskPosition: "bottom center",
+        }}
+      />
+    );
+  }
+
+  const darkClass =
+    onDark && variant !== "block" ? "invert opacity-90" : "";
+
   return (
-    <svg
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt=""
       aria-hidden
-      viewBox="0 0 1200 160"
-      preserveAspectRatio="none"
-      className={className}
-      fill={fill}
-    >
-      <path d="M0 160 V118 H28 V96 H42 V118 H58 V88 H72 V118 H88 V102 H102 V118 H120 V70 H138 V50 H148 V70 H166 V118 H186 V92 H198 V118 H220 V78 H236 V60 H246 V78 H262 V118 H285 V55 H300 V35 H312 V55 H328 V118 H348 V95 H360 V118 H380 V72 H392 V48 H404 V72 H418 V118 H445 V40 H458 V18 H470 V40 H485 V118 H510 V85 H522 V118 H540 V68 H552 V48 H564 V68 H578 V118 H600 V30 H612 V8 H624 V30 H638 V118 H660 V90 H672 V118 H690 V75 H702 V55 H714 V75 H728 V118 H755 V62 H768 V42 H780 V62 H795 V118 H820 V88 H832 V118 H850 V70 H862 V50 H874 V70 H888 V118 H915 V45 H928 V22 H940 V45 H955 V118 H980 V80 H992 V118 H1010 V65 H1022 V45 H1034 V65 H1048 V118 H1075 V95 H1088 V118 H1105 V78 H1118 V118 H1135 V100 H1148 V118 H1165 V88 H1178 V118 H1200 V160 Z" />
-    </svg>
+      draggable={false}
+      className={`pointer-events-none w-full object-contain object-bottom select-none ${darkClass} ${className}`}
+    />
   );
 }

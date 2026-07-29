@@ -2,7 +2,7 @@
 
 :root {
   /* EFICASA brand — navy, cyan, green (from arte / tarjetas) */
-  --site-header-height: 3.8125rem; /* brand stripe + bar */
+  --site-header-height: 6.25rem; /* stripe + logo bar (md) */
   --navy: #2d3488;
   --navy-deep: #1a1f5c;
   --cyan: #5bc8e0;
@@ -25,12 +25,12 @@
   --whatsapp: #25d366;
   --eco: #5cb246;
   --accent: #5bc8e0;
-  --gradient-hero: linear-gradient(
-    155deg,
-    var(--navy-deep) 0%,
-    var(--navy) 42%,
-    #2a7fa8 72%,
-    var(--cyan) 100%
+  --gradient-hero: radial-gradient(
+    ellipse 90% 70% at 50% 35%,
+    #1a5fa0 0%,
+    #123a72 42%,
+    #0c2750 72%,
+    #081a38 100%
   );
   --gradient-brand: linear-gradient(
     120deg,
@@ -102,17 +102,25 @@ a {
   color: var(--navy-deep);
 }
 
+/* Softened hex (rounded tips) — used for photo frames & small accents */
 .hex-clip {
-  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M32 7.5 L68 7.5 C75.5 7.5 81.5 11.5 85 18 L97.5 42 C100.5 47.5 100.5 52.5 97.5 58 L85 82 C81.5 88.5 75.5 92.5 68 92.5 L32 92.5 C24.5 92.5 18.5 88.5 15 82 L2.5 58 C-0.5 52.5 -0.5 47.5 2.5 42 L15 18 C18.5 11.5 24.5 7.5 32 7.5 Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M32 7.5 L68 7.5 C75.5 7.5 81.5 11.5 85 18 L97.5 42 C100.5 47.5 100.5 52.5 97.5 58 L85 82 C81.5 88.5 75.5 92.5 68 92.5 L32 92.5 C24.5 92.5 18.5 88.5 15 82 L2.5 58 C-0.5 52.5 -0.5 47.5 2.5 42 L15 18 C18.5 11.5 24.5 7.5 32 7.5 Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
 .hex-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='56' height='48' viewBox='0 0 56 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 1 L51 14 V38 L28 51 L5 38 V14 Z' fill='none' stroke='%235bc8e0' stroke-opacity='0.28' stroke-width='1'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='56' height='48' viewBox='0 0 56 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 3.5 H38 C42.5 3.5 46 6 48 9.5 L53.5 20 C55.5 23.5 55.5 28.5 53.5 32 L48 42.5 C46 46 42.5 48.5 38 48.5 H18 C13.5 48.5 10 46 8 42.5 L2.5 32 C0.5 28.5 0.5 23.5 2.5 20 L8 9.5 C10 6 13.5 3.5 18 3.5 Z' fill='none' stroke='%235bc8e0' stroke-opacity='0.28' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-size: 56px 48px;
 }
 
 .hex-pattern-light {
-  background-image: url("data:image/svg+xml,%3Csvg width='56' height='48' viewBox='0 0 56 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 1 L51 14 V38 L28 51 L5 38 V14 Z' fill='none' stroke='%232d3488' stroke-opacity='0.1' stroke-width='1'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='56' height='48' viewBox='0 0 56 48' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M18 3.5 H38 C42.5 3.5 46 6 48 9.5 L53.5 20 C55.5 23.5 55.5 28.5 53.5 32 L48 42.5 C46 46 42.5 48.5 38 48.5 H18 C13.5 48.5 10 46 8 42.5 L2.5 32 C0.5 28.5 0.5 23.5 2.5 20 L8 9.5 C10 6 13.5 3.5 18 3.5 Z' fill='none' stroke='%232d3488' stroke-opacity='0.1' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E");
   background-size: 56px 48px;
 }
 
@@ -353,6 +361,10 @@ a {
 
 .fluid-blob {
   border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%;
+}
+
+.hero-fluid-photo {
+  isolation: isolate;
 }
 
 .brand-frame {

@@ -18,7 +18,7 @@ export function Footer() {
               )}
               <Link
                 href={link.href}
-                className="px-3 text-[11px] font-semibold tracking-[0.16em] text-navy uppercase transition hover:text-cyan-dark md:px-4"
+                className="px-3 text-sm font-semibold tracking-[0.12em] text-navy uppercase transition hover:text-cyan-dark md:px-4 md:text-[15px]"
               >
                 {link.label}
               </Link>

@@ -36,8 +36,8 @@ export function IntroReveal() {
   }, []);
 
   return (
-    <section ref={ref} className="relative mt-10 overflow-hidden md:mt-24">
-      <BrandBackdrop variant="light" showHexFloat />
+    <section ref={ref} className="relative mt-10 overflow-hidden md:mt-24 md:mb-24">
+      <BrandBackdrop variant="light" />
       <div className="relative mx-auto grid max-w-7xl overflow-hidden lg:grid-cols-2">
         <div
           className={`relative flex flex-col justify-center px-6 py-16 transition-all duration-1000 ease-out md:px-12 lg:py-24 ${
@@ -95,10 +95,6 @@ export function IntroReveal() {
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
-          <div
-            aria-hidden
-            className="float-hex absolute top-6 right-6 hidden h-16 w-16 border border-lime/60 bg-navy/10 hex-clip md:block"
-          />
         </div>
       </div>
     </section>
